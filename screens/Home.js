@@ -16,7 +16,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    text: {},
+    text: {
+        fontFamily: "InriaSans_700Bold_Italic",
+        fontSize: 25,
+    },
 });
 
 export default Home;
