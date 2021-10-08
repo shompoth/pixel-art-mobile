@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
-const Photo = () => {
+const Photo = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Photo</Text>
+            <Button title="Vers Home" onPress={() => navigation.popToTop()} />
         </View>
     );
 };
@@ -16,7 +17,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    text: {},
+    text: {
+        fontFamily: "InriaSans_700Bold_Italic",
+        fontSize: 25,
+    },
 });
 
 export default Photo;

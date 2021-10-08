@@ -1,22 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
+import { globalStyles } from "../styles/AppStyles";
 
-const Portolio = () => {
+const Portolio = ({ navigation }) => {
+    console.log(navigation);
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Portfolio</Text>
+        <View style={globalStyles.container}>
+            <Text style={globalStyles.text}>{navigation.getParam("name")}</Text>
+            <Text style={globalStyles.text}>{navigation.getParam("country")}</Text>
+            <Text style={globalStyles.text}>{navigation.getParam("totalImg")}</Text>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "orange",
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    text: {},
-});
 
 export default Portolio;
