@@ -1,1 +1,5 @@
-export default { white: "fff", clicked: "palevioletred" };
+export default {
+    white: "#fff",
+    clicked: "palevioletred",
+    lightBrown: "salmon",
+};
