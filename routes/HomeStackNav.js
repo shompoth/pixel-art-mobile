@@ -1,5 +1,10 @@
+// Librairies
+import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
+import { Button } from "react-native";
+
+// Composants
 import Home from "../screens/Home";
 import Photo from "../screens/Photo";
 import Portfolio from "../screens/Portfolio";

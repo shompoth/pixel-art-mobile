@@ -1,6 +1,12 @@
+// Librairies
 import React from "react";
-import { FlatList, Text, View, Image, Pressable } from "react-native";
+import { FlatList, View } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
+// Components
+import PressableItems from "../components/PressableItems/PressableItems";
 import { globalStyles } from "../styles/AppStyles";
+import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
 import Colors from "../styles/Colors";
 
 const Home = ({ navigation }) => {
@@ -48,9 +54,9 @@ const Home = ({ navigation }) => {
 
     const renderProfils = ({ item }) => {
         return (
-            <Pressable
-                // onPress={() => navigation.navigate("Portfolio", item)}
-                onPress={() =>
+            <PressableItems
+                item={item}
+                handleNavigate={() =>
                     navigation.navigate({
                         routeName: "Portfolio",
                         params: {
@@ -61,18 +67,7 @@ const Home = ({ navigation }) => {
                         },
                     })
                 }
-                style={({ pressed }) => [
-                    { backgroundColor: pressed ? Colors.clicked : Colors.white },
-                    globalStyles.profilItem,
-                ]}
-            >
-                <Text style={globalStyles.titleText}>{item.name}</Text>
-                <Image style={globalStyles.profilImg} source={{ uri: item.img }} />
-                <View style={globalStyles.infoContainer}>
-                    <Text style={globalStyles.infos}>{item.country}</Text>
-                    <Text style={globalStyles.infos}>{item.totalImg}</Text>
-                </View>
-            </Pressable>
+            />
         );
     };
 
@@ -85,6 +80,14 @@ const Home = ({ navigation }) => {
             />
         </View>
     );
+};
+
+Home.navigationOptions = {
+    headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
+            <Item title="Menu" iconName="menu" onPress={() => alert(`Menu`)} />
+        </HeaderButtons>
+    ),
 };
 
 export default Home;

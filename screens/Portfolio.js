@@ -1,12 +1,13 @@
 import React from "react";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 // Composants
 import { Text, View } from "react-native";
 import { globalStyles } from "../styles/AppStyles";
 import Colors from "../styles/Colors";
+import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
 
 const Portolio = ({ navigation }) => {
-    console.log(navigation);
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.text}>{navigation.getParam("name")}</Text>
@@ -16,10 +17,6 @@ const Portolio = ({ navigation }) => {
         </View>
     );
 };
-
-// Portolio.navigationOptions={
-//   headerTitle
-// }
 
 Portolio.navigationOptions = navigationData => {
     const name = navigationData.navigation.getParam("name");
@@ -31,6 +28,15 @@ Portolio.navigationOptions = navigationData => {
             backgroundColor: favColor,
         },
         headerTintColor: Colors.white,
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
+                <Item
+                    title="info"
+                    iconName="info-outline"
+                    onPress={() => alert(`Portfolio de ${name}`)}
+                />
+            </HeaderButtons>
+        ),
     };
 };
 
