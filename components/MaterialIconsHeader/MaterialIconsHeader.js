@@ -6,7 +6,7 @@ import Colors from "../../styles/Colors";
 const MaterialIconsHeader = props => (
     <HeaderButton
         IconComponent={MaterialIcons}
-        iconSize={23}
+        iconSize={30}
         {...props}
         color={Colors.white}
     />

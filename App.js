@@ -1,8 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
-import StackNav from "./routes/HomeStackNav";
+import MainNavigator from "./routes/DrawerNav";
 import {
     useFonts,
     InriaSans_300Light,
@@ -12,8 +10,6 @@ import {
     InriaSans_700Bold,
     InriaSans_700Bold_Italic,
 } from "@expo-google-fonts/inria-sans";
-
-import Home from "./screens/Home";
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -28,15 +24,6 @@ export default function App() {
     if (!fontsLoaded) {
         return <AppLoading />;
     } else {
-        return <StackNav />;
+        return <MainNavigator />;
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});

@@ -1,27 +1,17 @@
 // Librairies
 import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
 
 // Composants
-import Home from "../screens/Home";
-import Photo from "../screens/Photo";
-import Portfolio from "../screens/Portfolio";
+import Faq from "../screens/Faq";
 import Colors from "../styles/Colors";
 
 const screens = {
-    Home: {
-        screen: Home,
+    Faq: {
+        screen: Faq,
         navigationOptions: {
-            title: "Accueil",
+            title: "FAQ",
         },
     },
-    Portfolio: {
-        screen: Portfolio,
-        navigationOptions: {
-            title: "Profil",
-        },
-    },
-    Photo: { screen: Photo },
 };
 
 const defaultNavigationOptions = {
@@ -36,7 +26,7 @@ const defaultNavigationOptions = {
     },
 };
 
-const StackNav = createStackNavigator(screens, defaultNavigationOptions);
+const FaqStackNav = createStackNavigator(screens, defaultNavigationOptions);
 
-export default StackNav;
+export default FaqStackNav;
 // export default createAppContainer(StackNav);

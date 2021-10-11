@@ -82,12 +82,19 @@ const Home = ({ navigation }) => {
     );
 };
 
-Home.navigationOptions = {
-    headerLeft: () => (
-        <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
-            <Item title="Menu" iconName="menu" onPress={() => alert(`Menu`)} />
-        </HeaderButtons>
-    ),
+Home.navigationOptions = ({ navigation }) => {
+    return {
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
+                <Item
+                    title="Menu"
+                    iconName="menu"
+                    // navigation.to
+                    onPress={() => navigation.toggleDrawer()}
+                />
+            </HeaderButtons>
+        ),
+    };
 };
 
 export default Home;
