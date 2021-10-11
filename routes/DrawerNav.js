@@ -1,13 +1,13 @@
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { createAppContainer } from "react-navigation";
 // Components
-import StackNav from "./HomeStackNav";
+import BottomTabNav from "./BottomTabNav";
 import FaqStackNav from "./FaqStackNav";
 import Colors from "../styles/Colors";
 
 const RouteConfig = {
     Home: {
-        screen: StackNav,
+        screen: BottomTabNav,
         navigationOptions: {
             title: "Accueil",
         },
