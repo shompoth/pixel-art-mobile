@@ -23,7 +23,7 @@ const RouteConfig = {
 const DrawerNavigatorConfig = {
     drawerWidth: "50%",
     drawerType: "slide",
-    drawerBackgroundColor: "#333",
+    drawerBackgroundColor: Colors.darkGrey,
     contentOptions: {
         labelStyle: {
             fontSize: 19,
