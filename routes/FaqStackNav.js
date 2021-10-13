@@ -29,4 +29,3 @@ const defaultNavigationOptions = {
 const FaqStackNav = createStackNavigator(screens, defaultNavigationOptions);
 
 export default FaqStackNav;
-// export default createAppContainer(StackNav);

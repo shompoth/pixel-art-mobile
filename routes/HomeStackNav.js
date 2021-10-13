@@ -39,4 +39,3 @@ const defaultNavigationOptions = {
 const StackNav = createStackNavigator(screens, defaultNavigationOptions);
 
 export default StackNav;
-// export default createAppContainer(StackNav);
