@@ -2,19 +2,23 @@ import React from "react";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 // Composants
-import { Text, View } from "react-native";
+import { Text, View, ScrollView, StyleSheet, Image } from "react-native";
 import { globalStyles } from "../styles/AppStyles";
 import Colors from "../styles/Colors";
 import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
 
 const Portolio = ({ navigation }) => {
+    const favColor = navigation.getParam("favColor");
+    const name = navigation.getParam("name");
+    const profilImg = navigation.getParam("img");
+
     return (
-        <View style={globalStyles.container}>
-            <Text style={globalStyles.text}>{navigation.getParam("name")}</Text>
-            <Text style={globalStyles.text}>{navigation.getParam("country")}</Text>
-            <Text style={globalStyles.text}>{navigation.getParam("totalImg")}</Text>
-            <Text style={globalStyles.text}>{navigation.getParam("favColor")}</Text>
-        </View>
+        <ScrollView style={globalStyles.container}>
+            <View style={{ ...styles.profilInfos, backgroundColor: favColor }}>
+                <Image style={styles.smallprofilImg} source={{ uri: profilImg }} />
+                <Text style={styles.profilName}>{name}</Text>
+            </View>
+        </ScrollView>
     );
 };
 
@@ -39,5 +43,25 @@ Portolio.navigationOptions = navigationData => {
         ),
     };
 };
+
+const styles = StyleSheet.create({
+    profilInfos: {
+        alignItems: "center",
+        padding: 10,
+    },
+    smallprofilImg: {
+        width: 150,
+        height: 150,
+        borderRadius: 150 / 2,
+        margin: 9,
+        borderWidth: 6,
+        borderColor: Colors.white,
+    },
+    profilName: {
+        fontFamily: "InriaSans_700Bold",
+        color: Colors.white,
+        fontSize: 25,
+    },
+});
 
 export default Portolio;
