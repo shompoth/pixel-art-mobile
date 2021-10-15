@@ -2,15 +2,19 @@
 import React from "react";
 import { FlatList, View } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector } from "react-redux";
 
 // Components
 import PressableItems from "../components/PressableItems/PressableItems";
 import { globalStyles } from "../styles/AppStyles";
 import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
-import { DATA } from "../data/usersData";
+import NoData from "../components/NoData";
 import Colors from "../styles/Colors";
 
 const Home = ({ navigation }) => {
+    // Redux
+    const selectedCategories = useSelector(state => state.users.selectedCategories);
+
     // Function
 
     const renderProfils = ({ item }) => {
@@ -22,15 +26,19 @@ const Home = ({ navigation }) => {
         );
     };
 
-    return (
-        <View style={globalStyles.container}>
-            <FlatList
-                data={DATA}
-                keyExtractor={item => item.id}
-                renderItem={renderProfils}
-            />
-        </View>
-    );
+    if (selectedCategories.length === 0) {
+        return <NoData>Pas d'utilisateurs à afficher</NoData>;
+    } else {
+        return (
+            <View style={globalStyles.container}>
+                <FlatList
+                    data={selectedCategories}
+                    keyExtractor={item => item.id}
+                    renderItem={renderProfils}
+                />
+            </View>
+        );
+    }
 };
 
 Home.navigationOptions = ({ navigation }) => {

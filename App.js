@@ -11,6 +11,10 @@ import {
     InriaSans_700Bold_Italic,
 } from "@expo-google-fonts/inria-sans";
 
+// Store
+import store from "./redux/store";
+import { Provider } from "react-redux";
+
 export default function App() {
     let [fontsLoaded] = useFonts({
         InriaSans_300Light,
@@ -24,6 +28,10 @@ export default function App() {
     if (!fontsLoaded) {
         return <AppLoading />;
     } else {
-        return <MainNavigator />;
+        return (
+            <Provider store={store}>
+                <MainNavigator />
+            </Provider>
+        );
     }
 }
