@@ -10,6 +10,7 @@ import { globalStyles } from "../styles/AppStyles";
 import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
 import NoData from "../components/NoData/NoData";
 import Colors from "../styles/Colors";
+import ModalSettings from "../components/ModalSettings/ModalSettings";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -49,6 +50,7 @@ const Home = ({ navigation }) => {
                         style={styles.modalClose}
                         onPress={handleSettingsModal}
                     />
+                    <ModalSettings />
                 </View>
             </Modal>
             <FlatList
