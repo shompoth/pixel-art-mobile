@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 // Composants
@@ -8,16 +8,38 @@ import Colors from "../styles/Colors";
 import TouchableImage from "../components/TouchableImage/TouchableImage";
 import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setSelection } from "../redux/actions/actionSelection";
+
 const Portolio = ({ navigation }) => {
+    const dispatch = useDispatch();
+    // Variables
     const favColor = navigation.getParam("favColor");
     const name = navigation.getParam("name");
     const profilImg = navigation.getParam("img");
     const description = navigation.getParam("desc");
     const photoArray = navigation.getParam("photos");
+    const userId = navigation.getParam("id");
 
+    // Fonctions
     const selectPhoto = photo => {
         navigation.navigate("Photo", photo);
     };
+
+    const handleDispatch = useCallback(() => {
+        dispatch(setSelection(userId));
+
+        Alert.alert(
+            "Photos enregistrées",
+            "Elles sont disponibles dans votre sélection",
+            [{ text: "OK" }],
+        );
+    }, [dispatch, userId]);
+
+    useEffect(() => {
+        navigation.setParams({ handleLike: handleDispatch });
+    }, [handleDispatch]);
 
     return (
         <ScrollView style={globalStyles.container}>
@@ -46,6 +68,7 @@ const Portolio = ({ navigation }) => {
 Portolio.navigationOptions = navigationData => {
     const name = navigationData.navigation.getParam("name");
     const favColor = navigationData.navigation.getParam("favColor");
+    const handleLike = navigationData.navigation.getParam("handleLike");
 
     return {
         headerTitle: `Profil de ${name}`,
@@ -55,11 +78,7 @@ Portolio.navigationOptions = navigationData => {
         headerTintColor: Colors.white,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
-                <Item
-                    title="info"
-                    iconName="info-outline"
-                    onPress={() => Alert.alert(`Portfolio de ${name}`)}
-                />
+                <Item title="add" iconName="thumb-up" onPress={() => handleLike} />
             </HeaderButtons>
         ),
     };
