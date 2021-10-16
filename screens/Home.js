@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
                         style={styles.modalClose}
                         onPress={handleSettingsModal}
                     />
-                    <ModalSettings />
+                    <ModalSettings closeModal={handleSettingsModal} />
                 </View>
             </Modal>
             <FlatList

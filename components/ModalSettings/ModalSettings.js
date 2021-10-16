@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useCallback } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 // Components
 import { globalStyles } from "../../styles/AppStyles";
 import Colors from "../../styles/Colors";
 import CustomSwitch from "../CustomSwitch/CustomSwitch";
 
-const ModalSettings = () => {
+const ModalSettings = ({ closeModal }) => {
     // State
     const [isAnimals, setIsAnimals] = useState(true);
     const [isTravel, setIsTravel] = useState(true);
     const [isCars, setIsCars] = useState(true);
 
     // Fonctions
-    const saveSettings = () => {
+
+    const saveSettings = useCallback(() => {
         const savedSettings = {
             animals: isAnimals,
             travel: isTravel,
             cars: isCars,
         };
-    };
+        console.log(savedSettings);
+        closeModal();
+    }, [isAnimals, isTravel, isCars]);
 
     // Redux
 
@@ -45,6 +48,19 @@ const ModalSettings = () => {
                 state={isCars}
                 handleSwitch={newVal => setIsCars(newVal)}
             />
+            {isAnimals === false && isTravel === false && isCars === false ? (
+                <Text
+                    style={{
+                        ...styles.settingsText,
+                        color: Colors.clicked,
+                        textAlign: "center",
+                    }}
+                >
+                    Veuillez au moins choisir une catégorie
+                </Text>
+            ) : (
+                <Button title="Validez les paramètres" onPress={saveSettings} />
+            )}
         </View>
     );
 };
