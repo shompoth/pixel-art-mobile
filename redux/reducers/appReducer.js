@@ -22,7 +22,7 @@ const appReducer = (state = initialState, action) => {
                 return { ...state, selectedUsers: newSelectedUsers };
             } else {
                 const user = state.users.find(user => user.id === action.userId);
-                return { ...state, selectedUser: state.selectedUsers.concat(user) };
+                return { ...state, selectedUsers: state.selectedUsers.concat(user) };
             }
 
         default:

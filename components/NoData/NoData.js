@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text } from "react-native";
-import Colors from "../styles/Colors";
+import Colors from "../../styles/Colors";
 
 const NoData = ({ children }) => {
     return (

@@ -8,8 +8,7 @@ import { useSelector } from "react-redux";
 import PressableItems from "../components/PressableItems/PressableItems";
 import { globalStyles } from "../styles/AppStyles";
 import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
-import NoData from "../components/NoData";
-import Colors from "../styles/Colors";
+import NoData from "../components/NoData/NoData";
 
 const Home = ({ navigation }) => {
     // Redux

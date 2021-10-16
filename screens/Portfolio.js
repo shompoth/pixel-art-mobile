@@ -10,11 +10,13 @@ import TouchableImage from "../components/TouchableImage/TouchableImage";
 import MaterialIconsHeader from "../components/MaterialIconsHeader/MaterialIconsHeader";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelection } from "../redux/actions/actionSelection";
 
 const Portolio = ({ navigation }) => {
+    // Redux
     const dispatch = useDispatch();
+
     // Variables
     const favColor = navigation.getParam("favColor");
     const name = navigation.getParam("name");
@@ -24,6 +26,10 @@ const Portolio = ({ navigation }) => {
     const userId = navigation.getParam("id");
 
     // Fonctions
+    const selectedUser = useSelector(state =>
+        state.users.selectedUsers.some(user => user.id === userId),
+    );
+
     const selectPhoto = photo => {
         navigation.navigate("Photo", photo);
     };
@@ -31,16 +37,26 @@ const Portolio = ({ navigation }) => {
     const handleDispatch = useCallback(() => {
         dispatch(setSelection(userId));
 
-        Alert.alert(
-            "Photos enregistrées",
-            "Elles sont disponibles dans votre sélection",
-            [{ text: "OK" }],
-        );
-    }, [dispatch, userId]);
+        if (selectedUser) {
+            Alert.alert("Photos effacées", `Les photos de ${name} sont effacées`, [
+                { text: "OK" },
+            ]);
+        } else {
+            Alert.alert(
+                "Photos enregistrées",
+                "Elles sont disponibles dans votre sélection",
+                [{ text: "OK" }],
+            );
+        }
+    }, [dispatch, userId, selectedUser]);
 
     useEffect(() => {
         navigation.setParams({ handleLike: handleDispatch });
     }, [handleDispatch]);
+
+    useEffect(() => {
+        navigation.setParams({ isSelected: selectedUser });
+    }, [selectedUser]);
 
     return (
         <ScrollView style={globalStyles.container}>
@@ -70,6 +86,7 @@ Portolio.navigationOptions = navigationData => {
     const name = navigationData.navigation.getParam("name");
     const favColor = navigationData.navigation.getParam("favColor");
     const handleLike = navigationData.navigation.getParam("handleLike");
+    const isSelected = navigationData.navigation.getParam("isSelected");
 
     return {
         headerTitle: `Profil de ${name}`,
@@ -79,7 +96,11 @@ Portolio.navigationOptions = navigationData => {
         headerTintColor: Colors.white,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={MaterialIconsHeader}>
-                <Item title="add" iconName="thumb-up" onPress={() => handleLike} />
+                <Item
+                    title="add"
+                    iconName={isSelected ? "delete" : "thumb-up"}
+                    onPress={handleLike}
+                />
             </HeaderButtons>
         ),
     };
