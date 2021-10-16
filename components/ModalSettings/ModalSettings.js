@@ -6,7 +6,14 @@ import { globalStyles } from "../../styles/AppStyles";
 import Colors from "../../styles/Colors";
 import CustomSwitch from "../CustomSwitch/CustomSwitch";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setCategorySettings } from "../../redux/actions/actionSettings";
+
 const ModalSettings = ({ closeModal }) => {
+    // generate Dispatch redux
+    const dispatch = useDispatch();
+
     // State
     const [isAnimals, setIsAnimals] = useState(true);
     const [isTravel, setIsTravel] = useState(true);
@@ -20,7 +27,9 @@ const ModalSettings = ({ closeModal }) => {
             travel: isTravel,
             cars: isCars,
         };
-        console.log(savedSettings);
+
+        // Dispatch action
+        dispatch(setCategorySettings(savedSettings));
         closeModal();
     }, [isAnimals, isTravel, isCars]);
 
